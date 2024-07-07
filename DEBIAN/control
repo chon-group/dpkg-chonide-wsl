@@ -1,5 +1,5 @@
 Package: chonos-wsl-installer
-Version: 0.0.1
+Version: 0.0.2
 Priority:
 Architecture: all
 Essential:

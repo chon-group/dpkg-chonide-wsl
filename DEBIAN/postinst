@@ -10,4 +10,4 @@ if ! grep -Fxq "$LINE" /etc/*/.bashrc; then
   echo "$LINE" >> /etc/*/.bashrc
 fi
 
-echo "root:root" | chroot $rootfs chpasswd
+echo "root:root" | chpasswd
