@@ -1,0 +1,14 @@
+Package: chonide-wsl
+Version: 0.0.1
+Priority:
+Architecture: all
+Essential:
+Depends: openssh-server, sudo
+Pre-depends: chonos-sysconfig (>= 1.4.4), chonos-embeddedmas (>= 1.2.1), chonos-ddnsmng (>= 1.5.6)
+Suggests:
+Installed-Size:
+Maintainer: chon@grupo.cefet-rj.br
+Conflicts: chonos, choncloud, chonide
+Replaces:
+Provides:
+Description: Meta package that provide the ChonIDE - An IDE to Support the Development of Embedded Multi-Agent Systems.

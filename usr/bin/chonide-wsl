@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sudo rm /tmp/.embedMAS -rf
+sudo rm /dev/shm/.embedMAS -rf
+
+sudo /usr/bin/chonosDDNSManager --conf -d `cat /etc/hostname` -u "ddns_user" -t "ddns_token"
+
+sudo /etc/init.d/ssh start
+nohup sudo /usr/bin/chonos-log --start &
+nohup sudo /usr/bin/chonos-task --start &
+sudo /usr/bin/chonosDDNSManager --update
+sudo /opt/group.chon/lib/tomcat/bin/catalina.sh start
