@@ -10,3 +10,11 @@ nohup sudo /usr/bin/chonos-log --start &
 nohup sudo /usr/bin/chonos-task --start &
 sudo /usr/bin/chonosDDNSManager --update
 sudo /opt/group.chon/lib/tomcat/bin/catalina.sh start
+
+
+json_ddns=$(chonosDDNSManager --status)
+domain=$(echo $json_ddns | jq -r '.domain')
+local_address=$(echo $json_ddns | jq -r '.localAddress')
+
+echo "Welcome to ChonOS WSL!"
+echo "Web console: https://$domain:3270 or https://$local_address:3270"

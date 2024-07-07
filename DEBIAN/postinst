@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#ChonCloud Welcome
+LINE='if [ -f /usr/bin/chonos-wsl-start ]; then /usr/bin/chonos-wsl-start; fi'
+if ! grep -Fxq "$LINE" /root/.bashrc; then
+  echo "$LINE" >> /root/.bashrc
+fi
+
+if ! grep -Fxq "$LINE" /etc/*/.bashrc; then
+  echo "$LINE" >> /etc/*/.bashrc
+fi
+
+echo "root:root" | chroot $rootfs chpasswd
