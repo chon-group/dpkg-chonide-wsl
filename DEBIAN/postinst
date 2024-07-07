@@ -11,3 +11,8 @@ if ! grep -Fxq "$LINE" /etc/*/.bashrc; then
 fi
 
 echo "root:root" | chpasswd
+
+systemctl disable chonos-log.service
+systemctl disable chonos-task.service
+systemctl disable chonos-sysconfig.service 
+systemctl disable chonos-ddnsAutoUpdater.service
