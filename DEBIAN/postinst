@@ -10,10 +10,12 @@ if ! grep -Fxq "$LINE" /home/*/.bashrc; then
   echo "$LINE" >> /home/*/.bashrc
 fi
 
-sudo /usr/bin/chonosDDNSManager --conf -d WSLINSTALL -u "ddns_user" -t "ddns_token"
+/usr/bin/chonosDDNSManager --conf -d WSLINSTALL -u "ddns_user" -t "ddns_token"
 echo "root:root" | chpasswd
 
 systemctl disable chonos-log.service
 systemctl disable chonos-task.service
 systemctl disable chonos-sysconfig.service 
 systemctl disable chonos-ddnsAutoUpdater.service
+
+/usr/bin/chonos-wsl-start

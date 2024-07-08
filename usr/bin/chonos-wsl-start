@@ -1,51 +1,58 @@
 #!/bin/bash
-echo "Starting ChonOS WSL - Services"
 
-echo -n "Cleaning temp files... "
-    sudo rm /tmp/.embedMAS -rf
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-    sudo rm /dev/shm/.embedMAS -rf
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-    sudo mkdir -p /tmp/.embedMAS
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-    sudo mkdir -p /dev/shm/.embedMAS
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-echo "[OK]"
-
-echo -n "Starting SSH service... "
-    sudo /etc/init.d/ssh start 1>/dev/shm/.embedMAS/nohup.txt
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-echo "[OK]"
-
-echo -n "Starting ChonOS Log Manager... "
-    nohup sudo /usr/bin/chonos-log --start 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt &
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-echo "[OK]"
-
-echo -n "Starting ChonOS Task Manager... "
-    nohup sudo /usr/bin/chonos-task --start 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt &
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-echo "[OK]"
-
-echo -n "Starting ChonOS DDNS Manager... "
-    domain=$(cat /opt/group.chon/conf/ddns.conf | cut -d ":" -f 1)
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-
-    if [ "$domain" == "WSLINSTALL" ]; then
-        domain=$(date +%s%3N | md5sum | cut -c 1-8)
+if [ ! -f /dev/shm/.embedMAS/nohup.txt ]; then 
+    echo "Starting ChonOS WSL - Services"
+        sudo echo -n ""
         if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-    fi
 
-    sudo chonosDDNSManager --conf -d $domain 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-    sudo /usr/bin/chonosDDNSManager --update 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-echo "[OK]"
+    echo -n "Cleaning temp files... "
+        sudo rm /tmp/.embedMAS -rf
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+        sudo rm /dev/shm/.embedMAS -rf
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+        mkdir -p /tmp/.embedMAS
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+        mkdir -p /dev/shm/.embedMAS
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+        touch /dev/shm/.embedMAS/nohup.txt
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+    echo "[OK]"
 
-echo -n "Starting ChonOS SysConfig... "
-    sudo /opt/group.chon/lib/tomcat/bin/catalina.sh start 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt
-    if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
-echo "[OK]"
+    echo -n "Starting SSH service... "
+        sudo /etc/init.d/ssh start 1>/dev/shm/.embedMAS/nohup.txt
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+    echo "[OK]"
+
+    echo -n "Starting ChonOS Log Manager... "
+        nohup sudo /usr/bin/chonos-log --start 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt &
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+    echo "[OK]"
+
+    echo -n "Starting ChonOS Task Manager... "
+        nohup sudo /usr/bin/chonos-task --start 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt &
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+    echo "[OK]"
+
+    echo -n "Starting ChonOS DDNS Manager... "
+        domain=$(cat /opt/group.chon/conf/ddns.conf | cut -d ":" -f 1)
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+
+        if [ "$domain" == "WSLINSTALL" ]; then
+            domain=$(date +%s%3N | md5sum | cut -c 1-8)
+            if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+        fi
+
+        sudo chonosDDNSManager --conf -d $domain 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+        sudo /usr/bin/chonosDDNSManager --update 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+    echo "[OK]"
+
+    echo -n "Starting ChonOS SysConfig... "
+        sudo /opt/group.chon/lib/tomcat/bin/catalina.sh start 1>/dev/shm/.embedMAS/nohup.txt 2>/dev/shm/.embedMAS/nohup.txt
+        if [ $? -ne 0 ]; then echo "[ERROR]"; exit 1; fi
+    echo "[OK]"
+fi
 
 json_ddns=$(chonosDDNSManager --status)
     if [ $? -ne 0 ]; then echo "[ERROR retrieving DDNS status]"; exit 1; fi
