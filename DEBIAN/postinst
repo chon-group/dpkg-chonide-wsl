@@ -6,10 +6,11 @@ if ! grep -Fxq "$LINE" /root/.bashrc; then
   echo "$LINE" >> /root/.bashrc
 fi
 
-if ! grep -Fxq "$LINE" /etc/*/.bashrc; then
-  echo "$LINE" >> /etc/*/.bashrc
+if ! grep -Fxq "$LINE" /home/*/.bashrc; then
+  echo "$LINE" >> /home/*/.bashrc
 fi
 
+sudo /usr/bin/chonosDDNSManager --conf -d WSLINSTALL -u "ddns_user" -t "ddns_token"
 echo "root:root" | chpasswd
 
 systemctl disable chonos-log.service
