@@ -1,6 +1,6 @@
 # ChonOS for WSL
 
-||
+|![chonCloud](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/b2be88c8-cb7c-4061-a697-f17dd1e8ef8f)|
 |:--:|
 |ChonOS to Windows Subsytem for Linux|
 
