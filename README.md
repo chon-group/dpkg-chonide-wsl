@@ -10,28 +10,43 @@
 <details>
 <summary> Instructions to import a WSL chonOS image </summary>
 
-1. Download LXC Template available at [ChonOS SourceForge Repo](https://sourceforge.net/projects/chonos/files/rc1/)
+1. Salve into DOWNLOADS folder the WSL image available at [ChonOS SourceForge Repo](https://sourceforge.net/projects/chonos/files/rc1/)
+   
+![image](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/7ce3dd4a-8437-4ca6-b2f0-df4947968a8f)
+
 
 2. In the powershell run the commands below:
 
 ```sh
-
+wsl --import chonOS $env:USERPROFILE\chonOS $env:USERPROFILE\Downloads\chonOS-rc1-WSL.tar.gz
+wsl --distribution chonOS
 ```
 
-3. Running ChonOS for Cloud in a LXC Container:
 
-![]()
+![01](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/b33cf072-c137-4375-8a63-dfd6be6f4491)
 
-4. Acess the WebConsole using the default credentiais 
+
+3. Acess the WebConsole using the default credentiais 
 
 - user = root
 - passwd = root
+  
+![02](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/054171e1-6ab2-40f5-8b23-7141ec63a701)
+
 
 </details>
 
-## How to install a new WSL distribution with chonOS
+## How to install a new WSL distribution with chonOS?
 <details>
 <summary> Instructions to create a LXC Container using terminal command </summary>
+
+![101](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/f3631f2f-bc7c-4a04-b682-f47691465262)
+
+
+![image](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/978f8bde-3882-4e98-9abd-336de1dcd6bb)
+
+
+![106](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/d88e0cf8-60eb-4da2-9e1f-ff2737eaf649)
 
 
 
