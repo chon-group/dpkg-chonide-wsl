@@ -10,7 +10,7 @@
 <details>
 <summary> Instructions to import a WSL chonOS image </summary>
 
-1. Salve into DOWNLOADS folder the WSL image available at [ChonOS SourceForge Repo](https://sourceforge.net/projects/chonos/files/rc1/)
+1. Save into DOWNLOADS folder the WSL image available at [ChonOS SourceForge Repo](https://sourceforge.net/projects/chonos/files/rc1/)
    
 ![image](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/7ce3dd4a-8437-4ca6-b2f0-df4947968a8f)
 
@@ -26,7 +26,7 @@ wsl --distribution chonOS
 ![01](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/b33cf072-c137-4375-8a63-dfd6be6f4491)
 
 
-3. Acess the WebConsole using the default credentiais 
+3. Access the WebConsole using the default credentiais 
 
 - user = root
 - passwd = root
@@ -40,12 +40,28 @@ wsl --distribution chonOS
 <details>
 <summary> Instructions to create a LXC Container using terminal command </summary>
 
+1. in the powershell run the commands below:
+
+```sh
+wsl --isntall -d Debian
+```
+
 ![101](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/f3631f2f-bc7c-4a04-b682-f47691465262)
 
-
+2. After the installation, in the linux bash terminal, run the commands below:
+```sh
+echo "deb [trusted=yes] http://packages.chon.group/ chonos main" | sudo tee /etc/apt/sources.list.d/chonos.list
+sudo apt update
+sudo apt install chonos-wsl-installer -y
+```
 ![image](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/978f8bde-3882-4e98-9abd-336de1dcd6bb)
 
+3. Start the ChonOS-WSL service.
+```sh
+sudo chonos-wsl-start
+```
 
+4. Finally, access the WebConsole using the default credentials (user = root) (passwd = root).
 ![106](https://github.com/chon-group/dpkg-chonos-wsl-installer/assets/32855001/d88e0cf8-60eb-4da2-9e1f-ff2737eaf649)
 
 
